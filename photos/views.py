@@ -5,7 +5,8 @@ from django.contrib.auth.models import User
 import random
 
 def index(request):
-    photos = Photo.objects.filter(user=request.user.id)
+    user = random.sample(User.objects.all(), 1)[0]
+    photos = Photo.objects.filter(user=user.id)
 
     random.seed()
     sample = random.sample(photos, 2)
