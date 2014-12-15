@@ -4,7 +4,7 @@ from django.contrib import admin
 import settings
 admin.autodiscover()
 
-from picture_ranking import views
+# from picture_ranking import views
 
 urlpatterns = patterns('',
     # Examples:
