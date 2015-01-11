@@ -1,0 +1,83 @@
+@mixin background-black() {
+    background-color: #000000;
+}
+
+@mixin text-white() {
+    color: #FFFFFF;
+}
+
+@mixin center-horizontal() {
+    //Align text center
+    text-align: center;
+    //Align objects center
+    margin-left: auto;
+    margin-right: auto;
+}
+
+//Supported IE>=9
+@mixin center-vertical() {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+header {
+    @include background-black();
+    @include center-horizontal();
+    width: 80%;
+    //Viewport Height, supported IE>=9
+    height: 5vh;
+}
+
+footer {
+    @include background-black();
+    @include center-horizontal();
+    width: 80%;
+    //Viewport Height, supported IE>=9
+    height: 5vh;
+}
+
+.footer-menu-item {
+    @include text-white();
+    @include center-vertical();
+}
+
+.header-menu-item {
+    @include text-white();
+    @include center-vertical();
+    float: left;
+    padding: 5px;
+}
+
+.header-account-item {
+    @include text-white();
+    @include center-vertical();
+    float: right;
+    padding: 5px;
+}
+
+.body {
+    @include center-horizontal();
+    width: 80%;
+    height: 400px;
+}
+
+.body-background {
+    height: 400px;
+    width: 80%;
+    position: absolute;
+    background-position: center;
+    background-image: url('/static/img/background.svg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    z-index: -1;
+}
+
+.body-logo {
+    height: 400px;
+    width: 80%;
+    position: absolute;
+    background-position: center;
+    background-image: url('/static/img/vs.svg');
+    background-repeat: no-repeat;
+}

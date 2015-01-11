@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from photos.models import *
 from django.contrib.auth.models import User
+from django.contrib import messages
 import random
 
 def index(request):
@@ -9,9 +10,13 @@ def index(request):
     photos = Photo.objects.filter(user=user.id)
 
     random.seed()
-    sample = random.sample(photos, 2)
+    context = {}
+    try:
+        sample = random.sample(photos, 2)
+        context["photos"] = sample
+    except ValueError as e:
+        messages.add_message(request, messages.ERROR, "Please upload pictures")
 
-    context = {"photos" : sample}
     return render(request, "photos/index.html", context)
 
 def compare(request):

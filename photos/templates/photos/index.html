@@ -1,6 +1,4 @@
-{% extends "photos/base.html" %}
-{% load staticfiles %}
-{% load bootstrap3 %}
+{% extends "photos_base.html" %}
 {% load i18n %}
 {% load account %}
 {% load socialaccount %}
@@ -10,10 +8,16 @@
 {% trans "Vote" %}
 {% endblock %}
 
-{% block content %}
-
+{% block body_content %}
 <div class="row text-center">
     {{ user.username }}
+</div>
+<div class="row">
+    <div class="col-md-6">
+        {% for message in messages %}
+            <div style="color:red;font-weight:bold">{{ message }}</div>
+        {% endfor %}
+    </div>
 </div>
 <div class="row">
     <div class="col-md-6">

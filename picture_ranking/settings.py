@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
 
 # Quick-start development settings - unsuitable for production
@@ -39,6 +40,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'bootstrap3',
     'photos',
+    'pipeline',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -107,11 +109,44 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
-
 STATIC_URL = '/static/'
-MEDIA_ROOT = '/tmp'
+MEDIA_ROOT = 'storage'
 MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/'
 
-
 SITE_ID = 1
+
+STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+PIPELINE_STORAGE = STATICFILES_STORAGE = 'pipeline.storage.PipelineCachedStorage'
+
+
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'pipeline.finders.PipelineFinder',
+)
+
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.sass.SASSCompiler',
+)
+
+PIPELINE_CSS = {
+    'master': {
+        'source_filenames': (
+            'scss/master.scss',
+        ),
+        'output_filename': 'css/master.css',
+    },
+}
+
+# PIPELINE_JS = {
+#     'stats': {
+#         'source_filenames': (
+#           'js/jquery.js',
+#           'js/d3.js',
+#           'js/collections/*.js',
+#           'js/application.js',
+#         ),
+#         'output_filename': 'js/stats.js',
+#     }
+# }
