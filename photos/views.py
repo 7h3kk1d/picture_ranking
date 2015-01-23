@@ -4,7 +4,7 @@ from photos.models import *
 from django.contrib.auth.models import User
 from django.contrib import messages
 import random
-
+#Temporary code just to prove it works while we get the front end up
 def index(request):
     user = random.sample(User.objects.all(), 1)[0]
     photos = Photo.objects.filter(user=user.id)
